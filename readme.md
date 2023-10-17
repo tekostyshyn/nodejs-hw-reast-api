@@ -1,6 +1,6 @@
 # REST API for Contacts App
 
-This REST API is delpoyed at the following address: https://contacts-app-backend-kwn6.onrender.com
+This REST API is deployed at the following address: https://contacts-app-backend-kwn6.onrender.com
 
 ## AUTHENTICATION REQUESTS
 
@@ -21,7 +21,7 @@ This REST API is delpoyed at the following address: https://contacts-app-backend
     ResponseBody: {
         "user": {
         "email": "example@example.com",
-         "subscription": "starter"
+        "subscription": "starter"
         }
     }
 
@@ -38,4 +38,44 @@ This REST API is delpoyed at the following address: https://contacts-app-backend
     Status: 400 Bad Request
     Content-Type: application/json
     ResponseBody: <Помилка від Joi або іншої бібліотеки валідації>
+
+## Login
+
+`POST /api/users/login`
+
+    Content-Type: application/json
+    RequestBody: {
+        "email": "example@example.com",
+        "password": "examplepassword"
+    }
+
+### Login success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "token": "exampletoken",
+        "user": {
+            "email": "example@example.com",
+            "subscription": "starter"
+        }
+    }
+
+ ### Login auth error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Email or password is wrong"
+    }   
+
+ ### Login validation error
+
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: <Помилка від Joi або іншої бібліотеки валідації>
+
+
+## Get current user
+
 
