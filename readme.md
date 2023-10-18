@@ -235,13 +235,248 @@ This REST API is deployed at the following address: https://contacts-app-backend
 
 `GET /api/contacts`
 
+    Authorization: "Bearer {{token}}"
+
 ### Get user's contacts success response
 
     Status: 200 OK
     Content-Type: application/json
-    ResponseBody: {
-        "user": {
+    ResponseBody: [
+    {
+        "_id": "exampleid",
+        "name": "examplename",
         "email": "example@example.com",
-        "subscription": "starter"
+        "phone": "examplephone",
+        "favorite": false,
+        "owner": {
+            "_id": "exampleid",
+            "email": "example@example.com"
         }
+    }
+]
+
+### Get user's contacts unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    }
+
+## Get contact by id
+
+`GET /api/contacts/:id`
+
+    Authorization: "Bearer {{token}}"
+
+### Get contact by id success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "_id": "exampleid",
+        "name": "example name",
+        "email": "example@example.com",
+        "phone": "examplephone",
+        "favorite": true,
+        "owner": "exampleid",
+        "createdAt": "exampledate",
+        "updatedAt": "exampledate"
+}
+
+### Get contact by id not found
+
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not found"
+    }
+
+### Get contact by id wrong id format
+
+    Status: 400 Bad request
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "<Id> is not valid id"
+    }
+
+### Get contact by id unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    }
+
+## Add new contact
+
+`POST /api/contacts`
+
+    Authorization: "Bearer {{token}}"
+    Content-Type: application/json
+    RequestBody: {
+        "name": "examplename",
+        "email": "example@example.com",
+        "phone": "examplephone",
+    }
+
+### Add new contact success response
+
+    Status: 201 Created
+    Content-Type: application/json
+    ResponseBody: {
+        "name": "examplename",
+        "email": "example@example.com",
+        "phone": "examplephone",
+        "favorite": false,
+        "owner": "exampleid",
+        "_id": "exampleid",
+        "createdAt": "exampledate",
+        "updatedAt": "exampledate"
+    }
+
+### Add new contact missing required fields error
+
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "missing required <field name> field"
+    }
+
+### Add new contact unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    }
+
+## Delete contact
+
+`DELETE /api/contacts/:id`
+
+    Authorization: "Bearer {{token}}"
+
+### Delete contact success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Contact deleted"
+    }
+
+### Contact not found response
+
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not found"
+    }
+
+### Delete contact unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    }
+
+## Update contact
+
+`PUT /api/contacts/:id`
+
+    Authorization: "Bearer {{token}}"
+    Content-Type: application/json
+    RequestBody: {
+        "name": "examplename",
+        "email": "example@example.com",
+        "phone": "examplephone",
+    }
+
+### Update contact success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "_id": "exampleid",
+        "name": "example name",
+        "email": "example@example.com",
+        "phone": "examplephone",
+        "favorite": true,
+        "owner": "exampleid",
+        "createdAt": "exampledate",
+        "updatedAt": "exampledate"
+    }
+
+### Update contact missing required fields error
+
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "missing required <field name> field"
+    }
+
+### Update contact unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    } 
+
+### Contact not found response
+
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not found"
+    }
+
+## Update favorite field
+
+`PATCH / api / contacts /: contactId / favorite`
+
+    Authorization: "Bearer {{token}}"
+    Content-Type: application/json
+    RequestBody: {
+        "favorite": "true" | "false"
+    }
+
+### Update favorite field success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "_id": "exampleid",
+        "name": "example name",
+        "email": "example@example.com",
+        "phone": "examplephone",
+        "favorite": true,
+        "owner": "exampleid",
+        "createdAt": "exampledate",
+        "updatedAt": "exampledate"
+    }
+
+### Update favorite missing required fields error
+
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "missing field favorite"
+    }
+
+### Update favorite field unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    } 
+
+### Contact not found response
+
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not found"
     }
