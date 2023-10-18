@@ -2,7 +2,7 @@
 
 This REST API is deployed at the following address: https://contacts-app-backend-kwn6.onrender.com
 
-## AUTHENTICATION REQUESTS
+## AUTHENTICATION REQUESTS 
 
 ## Registration
 
@@ -78,4 +78,72 @@ This REST API is deployed at the following address: https://contacts-app-backend
 
 ## Get current user
 
+`GET /api/users/current`
 
+    Authorization: "Bearer {{token}}"
+
+### Current user success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "email": "example@example.com",
+        "subscription": "starter"
+    }
+
+### Current user unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    }    
+
+## Logout
+
+`POST /api/users/logout`
+
+    Authorization: "Bearer {{token}}"
+
+### Logout success response
+
+    Status: 204 No Content
+
+### Logout unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    } 
+
+## Subscription type update
+
+`PATCH /api/users`
+
+    Authorization: "Bearer {{token}}"
+    Content-Type: application/json
+    RequestBody: {
+        "subscription": "starter" | "pro" | "business"
+    }
+
+### Update success response
+
+    Status: 204 No Content
+
+### Update unauthorized error
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "_id": "exampleid",
+        "email": "example@example.com",
+        "password": "examplepassword",
+        "subscription": "pro",
+        "token": "exampletoken",
+        "avatarUrl": "//www.gravatar.com/avatar/5ed181b6895aea1a0cca372abd5c3759",
+        "verified": true,
+        "verificationToken": null,
+        "createdAt": "exampledate",
+        "updatedAt": "exampledate"
+}
