@@ -127,11 +127,7 @@ This REST API is deployed at the following address: https://contacts-app-backend
         "subscription": "starter" | "pro" | "business"
     }
 
-### Update success response
-
-    Status: 204 No Content
-
-### Update unauthorized error
+### Subscription update success response
 
     Status: 200 OK
     Content-Type: application/json
@@ -147,3 +143,35 @@ This REST API is deployed at the following address: https://contacts-app-backend
         "createdAt": "exampledate",
         "updatedAt": "exampledate"
 }
+
+### Subscription update unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    } 
+
+## Avatar update
+
+`PATCH /api/users/avatars`
+
+    Authorization: "Bearer {{token}}"
+    Content-Type: multipart/form-data
+    RequestBody: uploaded file
+
+### Avatar update success response
+
+    Status: 200 OK
+    Content-Type: application/json
+    ResponseBody: {
+        "avatarURL": "link to the image"
+    }
+
+### Avatar update unauthorized error
+
+    Status: 401 Unauthorized
+    Content-Type: application/json
+    ResponseBody: {
+        "message": "Not authorized"
+    } 
