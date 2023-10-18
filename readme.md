@@ -3,8 +3,6 @@
 This REST API is deployed at the following address: https://contacts-app-backend-kwn6.onrender.com
 
 ## USER REQUESTS 
-## Registration
-## Login
 
 ## Registration
 
